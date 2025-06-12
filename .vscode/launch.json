@@ -1,0 +1,13 @@
+{
+  // Đây là comment
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Node.js",
+      "program": "/Users/caotri/workspace/Backend/NodeJS/todo-api/src/main.js",
+      "envFile": "/Users/caotri/workspace/Backend/NodeJS/todo-api/.env"
+    }
+  ]
+}
