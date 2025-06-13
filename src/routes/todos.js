@@ -9,10 +9,9 @@ const todoController = require('../controllers/todoController');
  *   description: ToDo management
  */
 
-
 /**
  * @swagger
- * /api/todos:
+ * /api/todos/get-list:
  *   get:
  *     summary: Lấy danh sách ToDo (có filter)
  *     tags: [Todos]
@@ -53,13 +52,13 @@ const todoController = require('../controllers/todoController');
  *               items:
  *                 $ref: '#/components/schemas/Todo'
  */
-router.get('/', todoController.getTodos);
+router.get('/get-list', todoController.getTodos);
 
 /**
  * @swagger
- * /api/todos:
+ * /api/todos/create:
  *   post:
- *     summary: create ToDo
+ *     summary: Tạo ToDo mới
  *     tags: [Todos]
  *     requestBody:
  *       required: true
@@ -84,13 +83,13 @@ router.get('/', todoController.getTodos);
  *       400:
  *         description: Bad request
  */
-router.post('/', todoController.createTodo);
+router.post('/create', todoController.createTodo);
 
 /**
  * @swagger
- * /api/todos/{id}:
+ * /api/todos/update/{id}:
  *   put:
- *     summary: Update ToDo
+ *     summary: Cập nhật ToDo
  *     tags: [Todos]
  *     parameters:
  *       - in: path
@@ -98,7 +97,7 @@ router.post('/', todoController.createTodo);
  *         required: true
  *         schema:
  *           type: string
- *         description: ID of ToDo
+ *         description: ID của ToDo
  *     requestBody:
  *       content:
  *         application/json:
@@ -111,21 +110,21 @@ router.post('/', todoController.createTodo);
  *                 type: boolean
  *     responses:
  *       200:
- *         description: Updated successfully
+ *         description: Cập nhật thành công
  *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Todo'
  *       404:
- *         description: Todo Not Found
+ *         description: Không tìm thấy ToDo
  */
-router.put('/:id', todoController.updateTodo);
+router.put('/update/:id', todoController.updateTodo);
 
 /**
  * @swagger
- * /api/todos/{id}:
+ * /api/todos/delete/{id}:
  *   delete:
- *     summary: Delete ToDo
+ *     summary: Xoá ToDo
  *     tags: [Todos]
  *     parameters:
  *       - in: path
@@ -133,17 +132,17 @@ router.put('/:id', todoController.updateTodo);
  *         required: true
  *         schema:
  *           type: string
- *         description: ID of ToDo
+ *         description: ID của ToDo
  *     responses:
  *       200:
- *         description: Deleted successfully
+ *         description: Xoá thành công
  *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Todo'
  *       404:
- *         description: Todo Not Found
+ *         description: Không tìm thấy ToDo
  */
-router.delete('/:id', todoController.deleteTodo);
+router.delete('/delete/:id', todoController.deleteTodo);
 
 module.exports = router;

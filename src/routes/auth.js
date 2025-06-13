@@ -12,7 +12,7 @@ const userController = require('../controllers/userController');
 // Đăng ký
 /**
  * @swagger
- * /auth/register:
+ * /register:
  *   post:
  *     summary: Register a new user
  *     tags: [Auth]
@@ -53,7 +53,7 @@ router.post('/register', userController.register);
 // Đăng nhập
 /**
  * @swagger
- * /auth/login:
+ * /login:
  *   post:
  *     summary: Log in a user
  *     tags: [Auth]
