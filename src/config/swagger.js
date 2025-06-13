@@ -12,7 +12,7 @@ const options = {
     },
     servers: [
       {
-        url: 'https://todobackend-production-5f4c.up.railway.app/api',
+        url: 'https://todobackend-production-5f4c.up.railway.app',
       },
     ],
   },
