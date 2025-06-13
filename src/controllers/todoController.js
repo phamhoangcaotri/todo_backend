@@ -1,15 +1,6 @@
 const Todo = require('../models/todoModel');
 const { HTTP_STATUS } = require('../constants/constants');
 
-/**
- * @swagger
- * /todos:
- *   get:
- *     summary: Get List Todo
- *     responses:
- *       200:
- *         description: Thành công
- */
 exports.getTodos = async (req, res) => {
     const { completed, title, fromDate, toDate } = req.query;
 
