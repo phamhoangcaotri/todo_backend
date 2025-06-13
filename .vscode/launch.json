@@ -6,7 +6,7 @@
       "type": "node",
       "request": "launch",
       "name": "Debug Node.js",
-      "program": "/Users/caotri/workspace/Backend/NodeJS/todo-api/src/main.js",
+      "program": "/Users/caotri/workspace/Backend/NodeJS/todo-api/src/index.js",
       "envFile": "/Users/caotri/workspace/Backend/NodeJS/todo-api/.env"
     }
   ]
