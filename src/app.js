@@ -1,4 +1,3 @@
-// app.js
 const express = require('express');
 const mongoose = require('mongoose');
 const todoRoutes = require('./routes/todos');
@@ -9,18 +8,20 @@ require('dotenv').config();
 
 const app = express();
 
+// Middlewares
+app.use(express.json());
+
+// Swagger setup (nên để sau middleware chính)
 const { swaggerUi, swaggerSpec } = require('./config/swagger');
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-app.use(express.json());
-
-// Kết nối MongoDB
+// MongoDB connection
 mongoose.connect(MONGODB_URI)
-  .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.error('MongoDB connection error:', err));
+  .then(() => console.log('✅ Connected to MongoDB'))
+  .catch(err => console.error('❌ MongoDB connection error:', err));
 
-// Routes
-app.use('/auth', authRoutes);
-app.use('/todos', authMiddleware, todoRoutes);
+// Routes (nên prefix với /api)
+app.use('/api/auth', authRoutes);
+app.use('/api/todos', authMiddleware, todoRoutes);
 
 module.exports = app;

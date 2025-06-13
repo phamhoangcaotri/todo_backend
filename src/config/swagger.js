@@ -1,19 +1,23 @@
-// src/config/swagger.js
-const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
+const swaggerJsdoc = require('swagger-jsdoc');
 
 const options = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'Todo API',
+      title: 'ToDo API',
       version: '1.0.0',
+      description: 'API documentation for ToDo App',
     },
-    servers: [{ url: 'http://localhost:3000' }],
+    servers: [
+      {
+        url: 'https://todobackend-production-5f4c.up.railway.app/api',
+      },
+    ],
   },
-  apis: ['./src/routes/*.js'], // đường dẫn chứa Swagger comment
+  apis: ['./src/routes/*.js'], // <-- phải đúng path thật sự của file routes
 };
 
-const swaggerSpec = swaggerJsDoc(options);
+const swaggerSpec = swaggerJsdoc(options);
 
 module.exports = { swaggerUi, swaggerSpec };
