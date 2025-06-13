@@ -1,5 +1,5 @@
 const swaggerUi = require('swagger-ui-express');
-const swaggerJsdoc = require('../routes/');
+const swaggerJsdoc = require('swagger-jsdoc');
 
 const options = {
   definition: {
@@ -15,7 +15,7 @@ const options = {
       },
     ],
   },
-  apis: ['../routes/*.js'], // <-- phải đúng path thật sự của file routes
+  apis: ['src/routes/*.js'],
 };
 
 const swaggerSpec = swaggerJsdoc(options);
