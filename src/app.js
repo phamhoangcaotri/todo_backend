@@ -7,10 +7,11 @@ const authMiddleware = require('./middlewares/authMiddleware');
 const { MONGODB_URI } = require('./constants/constants');
 require('dotenv').config();
 
+const app = express();
+
 const { swaggerUi, swaggerSpec } = require('./config/swagger');
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-const app = express();
 app.use(express.json());
 
 // Kết nối MongoDB
