@@ -22,7 +22,7 @@ jobs:
         run: npm install
 
       - name: 📥 Install Railway CLI
-        run: npm install -g @railway/cli@3.0.14
+        run: npm install -g @railway/cli
 
       - name: 🧪 Echo token prefix
         run: echo "TOKEN=${RAILWAY_TOKEN:0:5}"
