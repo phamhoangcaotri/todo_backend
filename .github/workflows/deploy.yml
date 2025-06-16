@@ -29,16 +29,19 @@ jobs:
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
 
-      - name: 🔧 Set Railway config
+      - name: 🔧 Set Railway CLI token config
         run: |
           mkdir -p ~/.railway
           echo '{ "token": "'"$RAILWAY_TOKEN"'" }' > ~/.railway/config.json
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
 
-      - name: 🔗 Link Railway project
-        run: railway link -- --project 1d939b57-4d18-4196-a449-5ebc0232ae38
-
+      - name: 🔗 Create Railway project config
+        run: |
+          mkdir -p .railway
+          echo '{ "projectId": "1d939b57-4d18-4196-a449-5ebc0232ae38" }' > .railway/project.json
 
       - name: 🚀 Deploy to Railway
         run: railway up --ci --service backend
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
