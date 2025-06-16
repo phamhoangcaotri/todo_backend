@@ -22,10 +22,14 @@ jobs:
         run: npm install
 
       - name: 📥 Install Railway CLI
-        run: npm install -g @railway/cli
+        run: npm install -g @railway/cli@3.0.14
 
-      - name: 🚀 Deploy to Railway
-        run: railway link --project 1d939b57-4d18-4196-a449-5ebc0232ae38
+      - name: 🧪 Echo token prefix
+        run: echo "TOKEN=${RAILWAY_TOKEN:0:5}"
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-          RAILWAY_PROJECT_ID: 1d939b57-4d18-4196-a449-5ebc0232ae38
+
+      - name: 🚀 Deploy to Railway
+        run: railway up --ci --service backend --project 1d939b57-4d18-4196-a449-5ebc0232ae38
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
