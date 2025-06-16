@@ -21,11 +21,14 @@ jobs:
       - name: 📦 Install dependencies
         run: npm install
 
-      - name: 🧪 Run tests (optional)
-        run: npm test
-        # Nếu chưa có test, bạn có thể comment dòng này lại
+      # - name: 🧪 Run tests (optional)
+      #   run: npm test
+      # Nếu chưa có test thì có thể xóa dòng này
+
+      - name: 📥 Install Railway CLI
+        run: npm install -g railway
 
       - name: 🚀 Deploy to Railway
-        uses: railwayapp/cli-action@v1
-        with:
-          railwayToken: ${{ secrets.RAILWAY_TOKEN }}
+        run: railway up --service backend
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
