@@ -25,7 +25,7 @@ jobs:
         run: npm install -g @railway/cli
 
       - name: 🚀 Deploy to Railway
-        run: railway up --service backend --no-interactive
+        run: railway up --ci --service backend
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
           RAILWAY_PROJECT_ID: 1d939b57-4d18-4196-a449-5ebc0232ae38
