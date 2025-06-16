@@ -12,7 +12,7 @@ const userController = require('../controllers/userController');
 // Đăng ký
 /**
  * @swagger
- * /register:
+ * /api/auth/register:
  *   post:
  *     summary: Register a new user
  *     tags: [Auth]
@@ -31,8 +31,8 @@ const userController = require('../controllers/userController');
  *               password:
  *                 type: string
  *           example:
- *             username: triphc
- *             password: 123456
+ *             username: "triphc"
+ *             password: "123456"
  *     responses:
  *       201:
  *         description: User created successfully
@@ -53,7 +53,7 @@ router.post('/register', userController.register);
 // Đăng nhập
 /**
  * @swagger
- * /login:
+ * /api/auth/login:
  *   post:
  *     summary: Log in a user
  *     tags: [Auth]
@@ -72,8 +72,8 @@ router.post('/register', userController.register);
  *               password:
  *                 type: string
  *           example:
- *             username: triphc
- *             password: 123456789
+ *             username: "triphc"
+ *             password: "123456789"
  *     responses:
  *       200:
  *         description: Login successful

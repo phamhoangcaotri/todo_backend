@@ -1,33 +1,52 @@
-const Todo = require('../models/todoModel');
+const Todo = require('../models/todo.model');
 const { HTTP_STATUS } = require('../constants/constants');
 
 exports.getTodos = async (req, res) => {
-    const { completed, title, fromDate, toDate } = req.query;
+    try {
+        const {
+            completed,
+            title,
+            fromDate,
+            toDate,
+            page = 1,
+            limit = 10
+        } = req.query;
 
-    /// created query
-    const query = {};
-    if (completed != undefined) {
-        query.completed = completed == 'true';
+        const filter = {};
+
+        if (completed !== undefined) {
+            filter.completed = completed === 'true';
+        }
+
+        if (title) {
+            filter.title = { $regex: title, $options: 'i' };
+        }
+
+        if (fromDate || toDate) {
+            filter.createdAt = {};
+            if (fromDate) filter.createdAt.$gte = new Date(fromDate);
+            if (toDate) filter.createdAt.$lte = new Date(toDate);
+        }
+
+        const skip = (parseInt(page) - 1) * parseInt(limit);
+
+        const [total, data] = await Promise.all([
+            Todo.countDocuments(filter),
+            Todo.find(filter).skip(skip).limit(parseInt(limit))
+        ]);
+
+        res.json({
+            total,
+            page: parseInt(page),
+            limit: parseInt(limit),
+            data
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Server Error' });
     }
-
-    if (title != undefined) {
-        query.title = new RegExp(title, 'i');
-    }
-
-    if (fromDate != undefined && toDate != undefined) {
-        query.createdAt = new RegExp(title, 'i');
-    }
-
-    if (fromDate || toDate) {
-        query.createdAt = {};
-        if (fromDate) query.createdAt.$gte = new Date(fromDate);
-        if (toDate) query.createdAt.$lte = new Date(toDate);
-    }
-
-    const todos = await Todo.find(query).sort('-createdAt');
-
-    res.json(todos.map(formatTodo));
 };
+
 
 exports.createTodo = async (req, res) => {
     const { title } = req.body;
