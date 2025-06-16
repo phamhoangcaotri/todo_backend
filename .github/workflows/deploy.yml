@@ -21,12 +21,16 @@ jobs:
       - name: 📦 Install dependencies
         run: npm install
 
-      # - name: 📥 Install Railway CLI (latest)
-      #   run: npm install -g @railway/cli
+      # Nếu có test, mở dòng này
+      # - name: 🧪 Run tests
+      #   run: npm test
+
+      - name: 📥 Install Railway CLI (latest, working version)
+        run: |
+          curl -fsSL https://railway.app/install.sh | sh
+          echo "$HOME/.railway/bin" >> $GITHUB_PATH
 
       - name: 🚀 Deploy to Railway
-        run: railway up
+        run: railway up --service backend
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-          RAILWAY_PROJECT: 1d939b57-4d18-4196-a449-5ebc0232ae38
-          RAILWAY_ENVIRONMENT: production
