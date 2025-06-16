@@ -1,0 +1,83 @@
+# Swagger YAML equivalent to JS comments
+components:
+  parameters:
+    PageParam:
+      in: query
+      name: page
+      schema:
+        type: integer
+        default: 1
+      description: Current page (default = 1)
+
+    LimitParam:
+      in: query
+      name: limit
+      schema:
+        type: integer
+        default: 10
+      description: Items per page (default = 10)
+
+    CompletedParam:
+      in: query
+      name: completed
+      schema:
+        type: boolean
+      description: Filter by completion status (true/false)
+
+    TitleParam:
+      in: query
+      name: title
+      schema:
+        type: string
+      description: Search by title
+
+    FromDateParam:
+      in: query
+      name: fromDate
+      schema:
+        type: string
+        format: date
+      description: Created from date (YYYY-MM-DD)
+
+    ToDateParam:
+      in: query
+      name: toDate
+      schema:
+        type: string
+        format: date
+      description: Created to date (YYYY-MM-DD)
+
+    IdParam:
+      in: path
+      name: id
+      required: true
+      schema:
+        type: string
+      description: ID of the ToDo item
+
+  schemas:
+    AuthRequest:
+      type: object
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+          example: "triphc"
+        password:
+          type: string
+          example: "12345678"
+
+    RegisterResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "User registered successfully"
+
+    LoginResponse:
+      type: object
+      properties:
+        token:
+          type: string
