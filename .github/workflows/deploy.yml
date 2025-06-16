@@ -29,7 +29,15 @@ jobs:
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
 
-      - name: 🚀 Deploy to Railway
-        run: railway up --ci --service backend --project 1d939b57-4d18-4196-a449-5ebc0232ae38
+      - name: 🔧 Set Railway config
+        run: |
+          mkdir -p ~/.railway
+          echo '{ "token": "'"$RAILWAY_TOKEN"'" }' > ~/.railway/config.json
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+
+      - name: 🔗 Link Railway project
+        run: railway link 1d939b57-4d18-4196-a449-5ebc0232ae38
+
+      - name: 🚀 Deploy to Railway
+        run: railway up --ci --service backend
