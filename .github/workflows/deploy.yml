@@ -23,10 +23,9 @@ jobs:
 
       # - name: 🧪 Run tests (optional)
       #   run: npm test
-      # Nếu chưa có test thì có thể xóa dòng này
 
-      - name: 📥 Install Railway CLI
-        run: npm install -g railway
+      - name: 📥 Install Railway CLI (new version)
+        run: npm install -g @railway/cli
 
       - name: 🚀 Deploy to Railway
         run: railway up --service backend
